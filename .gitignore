@@ -1,0 +1,15 @@
+.next
+node_modules
+__pycache__
+.pytest_cache
+.venv
+venv
+dist
+build
+*.pyc
+.env
+.env.local
+backend/.mypy_cache
+backend/.ruff_cache
+backend/data/runtime
+
