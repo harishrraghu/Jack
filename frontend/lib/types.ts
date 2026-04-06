@@ -20,8 +20,109 @@ export type Structure = {
 };
 
 export type Regime = {
-  type: "trend_up" | "trend_down" | "range";
+  type:
+    | "trend_up"
+    | "trend_down"
+    | "range"
+    | "volatile"
+    | "squeeze"
+    | "weak_trend_up"
+    | "weak_trend_down";
   tradable: boolean;
+  strength: number;
+  ema_alignment: "fully_bullish" | "fully_bearish" | "partial" | "mixed";
+  bb_width_percentile: number;
+};
+
+export type TrendHealth = {
+  status: "healthy" | "overextended" | "weakening" | "exhausted";
+  momentum: "accelerating" | "steady" | "decelerating" | "reversing";
+  rsi_context: string;
+  macd_histogram_slope: "rising" | "flat" | "falling";
+  stoch_rsi_signal: "bullish_cross" | "bearish_cross" | "neutral";
+  vwap_supporting: boolean;
+};
+
+export type PriceLevel = {
+  price: number;
+  type: "support" | "resistance";
+  source: string;
+  strength: "weak" | "moderate" | "strong";
+};
+
+export type ConfluenceZone = {
+  top: number;
+  bottom: number;
+  type: "support" | "resistance";
+  sources: string[];
+  strength: number;
+};
+
+export type StructureLevels = {
+  levels: PriceLevel[];
+  confluence_zones: ConfluenceZone[];
+  nearest_support: number;
+  nearest_resistance: number;
+  price_position: string;
+  supertrend_value: number;
+  supertrend_direction: "up" | "down";
+  in_squeeze: boolean;
+  squeeze_fired: boolean;
+  fib_levels: Record<string, number>;
+};
+
+export type VolumeAnalysis = {
+  candle_vs_avg: "spike" | "elevated" | "normal" | "dry";
+  volume_ratio: number;
+  obv_trend: "rising" | "flat" | "falling";
+  obv_divergence: boolean;
+  vwap_position: "above" | "below";
+  vwap_distance_atr: number;
+  price_volume_divergence: "bullish_divergence" | "bearish_divergence" | "none";
+  volume_trend: "expanding" | "contracting" | "flat";
+  volume_supports_move: boolean;
+};
+
+export type Strategy = {
+  name: string;
+  category: "trend" | "range" | "squeeze" | "volatile" | "cross_regime";
+  matched: boolean;
+  prerequisites_met: boolean;
+  reasons: string[];
+  entry_price: number | null;
+  stop_loss: number | null;
+  target_price: number | null;
+  risk_reward: number | null;
+};
+
+export type ExitPlan = {
+  stop_loss: number;
+  stop_method: string;
+  target: number;
+  target_method: string;
+  risk_reward_ratio: number;
+  trailing_stop_method: string | null;
+  break_even_trigger: number | null;
+};
+
+export type ForecastResult = {
+  direction: "up" | "down";
+  magnitude: number;
+  p10: number[];
+  p50: number[];
+  p90: number[];
+  horizon: number;
+  confidence_band: number;
+};
+
+export type ForecastConfirmation = {
+  available: boolean;
+  agrees: boolean;
+  confident: boolean;
+  no_reversal: boolean;
+  confirmed: boolean;
+  band_width: number | null;
+  forecast_direction: string | null;
 };
 
 export type Liquidity = {
@@ -70,7 +171,7 @@ export type AnalysisResponse = {
   timeframe: string;
   candles: Candle[];
   context: DayContext;
-  structure: Structure;
+  structure?: Structure | null;
   regime: Regime;
   liquidity: Liquidity;
   score: Score;
@@ -78,6 +179,13 @@ export type AnalysisResponse = {
   narrative: Narrative;
   drawings: Drawing[];
   indicators: Record<string, number[]>;
+  volume_analysis?: VolumeAnalysis | null;
+  trend_health?: TrendHealth | null;
+  structure_levels?: StructureLevels | null;
+  forecast?: ForecastResult | null;
+  forecast_confirmation?: ForecastConfirmation | null;
+  exit_plan?: ExitPlan | null;
+  strategies?: Strategy[] | null;
 };
 
 export type FeedbackMetrics = {
@@ -85,4 +193,3 @@ export type FeedbackMetrics = {
   strategyBreakdown: Array<{ strategy: string; winRate: number; samples: number }>;
   regimeBreakdown: Array<{ regime: string; winRate: number; samples: number }>;
 };
-
