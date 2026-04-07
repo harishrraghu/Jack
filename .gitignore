@@ -12,4 +12,5 @@ build
 backend/.mypy_cache
 backend/.ruff_cache
 backend/data/runtime
-
+backend/data/banknifty_*.csv
+!backend/data/sample/

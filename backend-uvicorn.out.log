@@ -1,0 +1,47 @@
+INFO:     127.0.0.1:58720 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62490 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49666 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64153 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:54787 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54094 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52135 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:51573 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55954 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61443 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:60720 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56308 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53354 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:60720 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56308 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:60720 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52846 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58278 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58974 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63371 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62589 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56163 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53809 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50928 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:54067 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56379 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56395 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59123 - "GET /api/v1/analysis?timeframe=15m HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59121 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58550 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49352 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55149 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55041 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62280 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55000 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57892 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58959 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:61889 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50993 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52720 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64484 - "GET /api/journal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54167 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60866 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55530 - "GET /api/analysis?timeframe=15m HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64772 - "GET /api/feedback HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65514 - "GET /api/journal HTTP/1.1" 200 OK

@@ -7,6 +7,8 @@ pydantic-settings==2.6.1
 pandas==2.2.3
 numpy==2.1.3
 ta==0.11.0
+Bharat-sm-data-avinash>=4.1.0
+yfinance>=0.2.0
 # Optional: Jill (TimesFM probabilistic confirmation layer)
 # Install with: pip install timesfm[torch]
 # timesfm[torch]
