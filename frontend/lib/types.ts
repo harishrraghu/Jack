@@ -193,3 +193,33 @@ export type FeedbackMetrics = {
   strategyBreakdown: Array<{ strategy: string; winRate: number; samples: number }>;
   regimeBreakdown: Array<{ regime: string; winRate: number; samples: number }>;
 };
+
+export type BacktestPayload = {
+  real_candle: Candle;
+  portfolio_state: {
+    starting_capital: number;
+    capital: number;
+    day_pnl: number;
+    realized_pnl: number;
+    total_fees: number;
+    trades_count: number;
+  };
+  active_trade: {
+    direction: "BUY_CALL" | "BUY_PUT";
+    entry_spot: number;
+    entry_time: number;
+    stop_loss: number;
+    target: number;
+    quantity: number;
+  } | null;
+  jack_signals: {
+    signal: Signal;
+    regime: Regime;
+    score: number;
+  };
+  jill_forecast: number[];
+  event: {
+    type: "entry" | "exit";
+    trade: Record<string, unknown>;
+  } | null;
+};

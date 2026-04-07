@@ -118,9 +118,9 @@ class JillPredictor:
             point_forecast, quantile_forecast = await asyncio.to_thread(
                 self._model.forecast, [closes], freq=[0]
             )
-            p10 = quantile_forecast[0, :, 0].tolist()
-            p50 = point_forecast[0].tolist()
-            p90 = quantile_forecast[0, :, -1].tolist()
+            p10 = quantile_forecast[0, :horizon, 0].tolist()
+            p50 = point_forecast[0][:horizon].tolist()
+            p90 = quantile_forecast[0, :horizon, -1].tolist()
 
             direction = "up" if p50[-1] > closes[-1] else "down"
             magnitude = abs(p50[-1] - closes[-1])
