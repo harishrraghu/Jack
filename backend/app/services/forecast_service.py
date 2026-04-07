@@ -16,6 +16,11 @@ from app.schemas import Candle, ForecastResult
 class ForecastService:
     """Layer-7 Jill forecaster — delegates to the module-level singleton."""
 
-    async def forecast(self, candles: list[Candle]) -> Optional[ForecastResult]:
+    async def forecast(
+        self,
+        candles: list[Candle],
+        horizon: int = 8,
+        lookback: int = 128,
+    ) -> Optional[ForecastResult]:
         """Return a probabilistic forecast or None if TimesFM is unavailable."""
-        return await jill.predict(candles, horizon=8, lookback=128)
+        return await jill.predict(candles, horizon=horizon, lookback=lookback)

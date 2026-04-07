@@ -23,3 +23,6 @@ export function getFeedback() {
   return readJson<FeedbackMetrics>("/api/feedback");
 }
 
+export function getBacktestDates() {
+  return readJson<string[]>("/api/v1/backtest/dates");
+}

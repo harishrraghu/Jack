@@ -39,7 +39,24 @@ class AnalysisPipeline:
     async def analyze(self, timeframe: str) -> AnalysisResponse:
         candles = await self.data_service.get_candles(timeframe)
         external = await self.data_service.get_global_context()
+        return await self._analyze_with_candles(candles, timeframe, external)
 
+    async def analyze_from_backtest_windows(
+        self,
+        candles_15m,
+        candles_1h,
+        candles_1d,
+    ) -> AnalysisResponse:
+        external = await self.data_service.get_global_context()
+        if candles_1d:
+            external = {
+                **external,
+                "oi_wall_above": candles_1d[-1].high,
+                "oi_wall_below": candles_1d[-1].low,
+            }
+        return await self._analyze_with_candles(candles_15m, "15m", external)
+
+    async def _analyze_with_candles(self, candles, timeframe: str, external) -> AnalysisResponse:
         # Layer 1: Regime Detection (base indicators only)
         base_indicators = self.indicator_engine.calculate_base(candles)
         regime = self.regime_engine.derive(candles, base_indicators)
