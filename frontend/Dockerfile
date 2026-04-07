@@ -4,7 +4,6 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-# `npm ci` is faster and strictly reproducible for CI/Docker builds.
 RUN npm ci
 
 
@@ -18,39 +17,25 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# NEXT_PUBLIC_API_BASE_URL is baked in at build time.
-# Override with --build-arg or leave blank to use the runtime default.
+# Backend URL is baked in at build time (static export has no server-side env).
 ARG NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+ARG NEXT_PUBLIC_BASE_PATH=""
 ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+ENV NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH}
 
+# Produces the `out/` static directory.
 RUN npm run build
 
 
-# ── Stage 3: runtime ──────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
+# ── Stage 3: serve with nginx ─────────────────────────────────────────────────
+FROM nginx:1.27-alpine AS runner
 
-WORKDIR /app
+COPY --from=builder /app/out /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1
+EXPOSE 80
 
-# Run as non-root for security.
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser  --system --uid 1001 nextjs
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD wget -qO- http://localhost/ || exit 1
 
-# The standalone output bundles everything needed to run the server.
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-# Static assets must be copied separately (not included in standalone).
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT=3000 \
-    HOSTNAME="0.0.0.0"
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
-    CMD wget -qO- http://localhost:3000/ || exit 1
-
-CMD ["node", "server.js"]
+CMD ["nginx", "-g", "daemon off;"]
